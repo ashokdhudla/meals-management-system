@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %} 
+					<table class="table table-bordered table-hover table-striped tablesorter" id="guest_list">
+                          <thead>
+                            <tr>
+                              <th>Device Id<i class="fa fa-sort"></i></th>
+                              <th>Device Location<i class="fa fa-sort"></i></th>
+                              <th>Installation Date<i class="fa fa-sort"></i></th>
+                          </thead>
+                          <tbody>
+                          {%for dev in devices %}
+                            <tr>
+                              <td align="center">{{ dev.device_id}}</td>                  
+                              <td align="center">{{ dev.device_location}}</td>
+                              <td align="center">{{ dev.Installation_Date}}</td>
+                                                        
+                              <!-- <td align="center">{{ user.employee_type}}</td>
+                              <td align="center">{{ user.company}}</td>
+                              <td align="center">{{ user.department}}</td>   -->             
+                              <td><button type="button"  class="btn btn-primary center" onclick="Edit({{com.id}})">Edit</button><br/>
+                              <td><button type="button"  class="btn btn-primary center" onclick="Delete({{com.id}})">Delete</button><br/>
+                              </td>                   
+                              </tr>
+                              {%endfor%}                     
+                          </tbody>
+                        </table>
+                        
+                        <script>
+
+{% endblock %}

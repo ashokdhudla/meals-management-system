@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>QpAdmin LogIn</title>
+<link rel="icon" type="image/png" href="/static/images/fevicon.jpg" />
+<link rel="stylesheet" href="/static/css/style.default.css" type="text/css" />
+<link rel="stylesheet" href="/static/css/style.shinyblue.css" type="text/css" />
+
+<script type="text/javascript" src="/static/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery-migrate-1.1.1.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery-ui-1.9.2.min.js"></script>
+<script type="text/javascript" src="/static/js/modernizr.min.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="/static/js/custom.js"></script>
+
+
+</head>
+
+<body class="loginpage">
+
+<div class="loginpanel">
+    <div class="loginpanelinner">
+        <div align="center" style="color:#C00000" ><h4>{{err_msg}} </h4></div>
+        <div class="logo animate0 bounceIn"><img src="static/images/qplogo.jpg" alt="" /></div>
+        <form id="login" action="/login/" method="post">
+            {% csrf_token %}
+            <div class="inputwrapper login-alert">
+                <div class="alert alert-error">Invalid username or password</div>
+            </div>
+            <div class="inputwrapper animate1 bounceIn">
+                <input type="text" name="userid" id="userid" placeholder="Enter any username" />
+            </div>
+            <div class="inputwrapper animate2 bounceIn">
+                <input type="password" name="password" id="password" placeholder="Enter any password" />
+            </div>
+            <div class="inputwrapper animate3 bounceIn">
+                <button name="submit" >Sign In</button>
+            </div>
+            <div class="inputwrapper animate4 bounceIn">
+                <label><input type="checkbox" class="remember" name="signin" /> Keep me sign in</label>
+            </div>
+            
+        </form>
+    </div><!--loginpanelinner-->
+</div><!--loginpanel-->
+
+<div class="loginfooter">
+    <p>&copy; 2013. Shamcey Admin Template. All Rights Reserved.</p>
+</div>
+
+</body>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+function loginValidation()
+{
+    var u = jQuery('#userid').val();
+    var p = jQuery('#password').val();
+    if(u == '' && p == '')
+    {
+        jQuery('.login-alert').fadeIn();
+        return false;
+    }
+    else
+    {
+        alert("else partss")
+        var query_string = $('#login').serialize();
+        url = '/login'
+        post_data = query_string
+        $.post(url, post_data, function(data,status){
+        if(data == "Login Failed")
+        {
+            // alert("Login Failed")
+            // $("#ErrorMessage").html("Invalid Username and/or Password");
+             jQuery('.login-alert').fadeIn();
+             return false;
+        }   
+        if(data == "Login Success")
+        {
+            alert("Success")
+            window.location.href = "/dashboard/"
+        }
+            return true;
+        });
+    }
+    // jQuery('.login-alert').fadeIn();
+    // return false
+}
+</script>
+
+</html>

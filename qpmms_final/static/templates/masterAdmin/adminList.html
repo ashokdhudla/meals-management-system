@@ -1,0 +1,63 @@
+{% extends "base2.html" %}
+{% block content %} 
+					<table class="table table-bordered table-hover table-striped tablesorter" id="guest_list">
+                          <thead>
+                            <tr>
+                              <th>Name<i class="fa fa-sort"></i></th>
+                              <th>User Id<i class="fa fa-sort"></i></th>
+                              <th>Email Id<i class="fa fa-sort"></i></th>
+                              <th>Resident Location <i class="fa fa-sort"></i></th>
+                              <th>Contact No<i class="fa fa-sort"></i></th>
+                              <th>Gender<i class="fa fa-sort"></i></th>
+                              <!-- <th>Contact NO<i class="fa fa-sort"></i></th> -->
+                              <th>role<i class="fa fa-sort"></i></th>
+                              <!-- <th>Company<i class="fa fa-sort"></i></th>
+                              <th>Department<i class="fa fa-sort"></i></th> -->
+                              <!-- <th>Member<i class="fa fa-sort"></i></th>                -->                    
+                            </tr>
+                          </thead>
+                          <tbody>
+                          {%for user in qpusers %}
+                            <tr>
+                              <td align="center">{{ user.username}}</td>                  
+                              <td align="center">{{ user.user_id}}</td>
+                              <td align="center">{{ user.email_id}}</td>
+                              <td align="center">{{ user.resident_location}}</td> 
+                              <td align="center">{{ user.contact_no}}</td>
+                              <td align="center">{{ user.gender}}</td>
+                              <td align="center">{{ user.role}}</td>
+                              <!-- <td align="center">{{ user.employee_type}}</td>
+                              <td align="center">{{ user.company}}</td>
+                              <td align="center">{{ user.department}}</td>   -->             
+                              <td><button type="button"  class="btn btn-primary center" onclick="Edit({{user.id}})">Edit</button><br/>
+                              <td><button type="button"  class="btn btn-primary center" onclick="Delete({{user.id}})">Delete</button><br/>
+                              </td>                   
+                              </tr>
+                              {%endfor%}                     
+                          </tbody>
+                        </table>
+                        
+                        <script>
+
+							function Edit(id)
+							{
+							    // var url ='/guestEntry?gid='+id;
+							    // window.location.href = url
+
+							    alert("Edit")
+							}
+
+					</script>
+
+					<script>
+
+							function Delete(id)
+							{
+							    // var url ='/guestEntry?gid='+id;
+							    // window.location.href = url
+
+							    alert("Delete")
+							}
+
+					</script>
+{% endblock %}

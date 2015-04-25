@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="/static/css/dhtmlxcalendar.css"/>
+<script src="/static/js/dhtmlxcalendar.js"></script>
+
+<script>
+        var myCalendar;
+
+        function doOnLoad() {
+            myCalendar = new dhtmlXCalendarObject(["calendar","calendar2"]);
+        }
+</script>
+
+{% endblock %}
+{% block content %} 
+<div class="pageheader">
+                <div class="pageicon"><span class="iconfa-pencil"></span></div>
+                    <div class="pagetitle"><h1>Meal Reports</h1></div>
+                    </div>
+                    <!-- <div class="errortitle">
+        <h4 class="animate0 fadeInUp">The page you are looking for has not been found.</h4>
+        <span class="animate1 bounceIn">4</span>
+        <span class="animate2 bounceIn">0</span>
+        <span class="animate3 bounceIn">4</span>
+        <div class="errorbtns animate4 fadeInUp">
+            <a onclick="history.back()" class="btn btn-primary btn-large">Go to Previous Page</a>
+            <a href="dashboard.html" class="btn btn-large">Go to Dashboard</a>
+        </div>
+    </div> -->
+    <div class="container-fluid">
+    <div class="span12">
+    <form action="/mealreports" method="post">
+    {% csrf_token %}
+    <div class="form-control span6" style="float:left;">
+        <!-- From : <input type="date" name="from" /> -->
+        From : <input type="text" id="calendar" />
+     </div>
+     <div class="form-control">   
+        <!-- To : <input type="date" name="to" /> -->
+        To : <input type="text" id="calendar2" />
+     </div>
+     <div class="text-center"> 
+     <button type="submit" class="btn btn-primary" align="right">Submit</button>
+     <!-- <input type="button" id='submit' value="submit" /> -->
+     </div>
+   <!-- <form method="POST" action="">
+     <table class="table-hover table-stripped">
+         <tr align='justify'>
+         <td><h5>From :</h5></td>
+         <td><input type="date" id="from" name="from"></td>
+         <td></td>
+         <td><h5>To :</h5></td>
+         <td><input type="date" id="to" name="to"></td>
+         <td><button type="button" class="btn btn-primary" align="right">Submit</button></td>
+        </tr>
+     </table> -->
+      </div>  
+<table class="table table-hover table-striped table-bordered table-condensed">
+<tr>
+        <td>Employee_ID</td>
+        <td>Employee_Name</td>
+        <td>Company</td>
+        <td>Breakfast</td>
+        <td>Lunch</td>
+        <td>Dinner</td>
+</tr>
+{% for obj in lists %}
+    <tr>
+        <td>
+        {{ obj.employee_id }}
+        </td>
+        <td>
+        {{ obj.first_name }}
+        </td>
+        <td>
+        {{ obj.company }}
+        </td>
+       </tr>
+       {% endfor %}
+</table>
+</form>
+</div>
+
+{% endblock %} 

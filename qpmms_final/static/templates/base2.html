@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>QPAdmin DashBoard</title>
+<link rel="stylesheet" href="/static/css/style.default.css" type="text/css" />
+
+<link rel="stylesheet" href="/static/css/responsive-tables.css">
+<script type="text/javascript" src="/static/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery-migrate-1.1.1.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery-ui-1.9.2.min.js"></script>
+<script type="text/javascript" src="/static/js/modernizr.min.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="/static/js/jquery.uniform.min.js"></script>
+<script type="text/javascript" src="/static/js/flot/jquery.flot.min.js"></script>
+<script type="text/javascript" src="/static/js/flot/jquery.flot.resize.min.js"></script>
+<script type="text/javascript" src="/static/js/responsive-tables.js"></script>
+<script type="text/javascript" src="/static/js/custom.js"></script>
+<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
+</head>
+
+<body>
+
+<div class="mainwrapper">
+    
+    <div class="header">
+        <div class="logo">
+            <a href="/templates/dashboard.html"><h1 style="color:white;">SCSMAS</h1></a>
+        </div>
+        <div class="headerinner">
+            <ul class="headmenu">
+                <li class="right">
+    <div class="userloggedinfo"><img src="/images/photos/thumb1.png" alt="">
+        <div class="userinfo">
+           <h5>{{username}}<small>- {{email_id}}</small></h5>
+            <ul>
+               <li><a href="">Edit Profile</a></li>
+               <li><a href="">Account Settings</a></li>
+               <li><a href="/">Sign Out</a></li>
+            </ul>
+        </div>
+    </div>
+</li>
+    </div>
+</div>
+    <div class="leftpanel">
+        <div class="leftmenu">
+               <ul class="nav nav-tabs nav-stacked">
+                    <li class="nav-header">Navigation</li>
+                    <li><a href="/dashboard"><span class="iconfa-laptop"></span>Dashboard</a></li>
+              
+                       <li class="dropdown"><a href=""><span class="iconfa-pencil"></span>Admins</a>
+                     <ul>
+                          <li><a href="/viewadmin">View Admins</a></li>
+                          <li><a href="/regadmin">Register Admins</a></li>
+                     </ul>
+                     </li>
+                   
+                <li class="dropdown"><a href=""><span class="iconfa-pencil"></span>Employees</a>
+               <ul>
+                    <li><a href="/viewemp">View Employees</a></li>
+                    <li><a href="/regemp">Register Employees</a></li>
+               </ul>
+               </li>
+               <li class="dropdown"><a href=""><span class="iconfa-briefcase"></span>Companies</a>
+               <ul>
+                    <li><a href="/viewcom">View Companies</a></li>
+                    <li><a href="/regcom">Register Company</a></li></ul></li>
+               <li class="dropdown"><a href=""><span class="iconfa-briefcase"></span>Devices</a>
+               <ul>
+                    <li><a href="/viewdev">View Devices</a></li>
+                    <li><a href="/regdev">Register Device</a></li></ul></li>
+               <li class="dropdown"><a href=""><span class="iconfa-briefcase"></span>Meal Reports</a>
+               <ul>
+                    <li><a href="/mealreports">Meal Reports</a></li>
+                    <li><a href="/mealdetails">Detailed Meal Reports</a></li></ul></li>
+               <li class="dropdown"><a href=""><span class="iconfa-bar-chart"></span>Accommodation</a>
+               <ul>
+                    <li><a href="/accreports">Accomodation Reports</a></li>
+                    <li><a href="/detailreports">Detailed Accomodation Reports</a></li></ul></li></ul>
+
+                     <li class="dropdown"><a href=""><span class="iconfa-pencil"></span>Configuration</a>
+                     <ul>
+                          <li><a href="/mealsconfig">Meals timing Config</a></li>
+                          <li><a href="/priceconfig">Price Config</a></li>
+                     </ul>
+                     </li>
+            </div>
+        </div>
+        <div class="rightpanel">
+        {% block content %} {% endblock %}
+            
+            <div class="footer">
+                <div class="footer-left">
+                    <span>©2014. Qatar Petrolium. All Rights Reserved.</span>
+                </div>
+                <div class="footer-right">
+                    <span>Designed for:  Qatar Petrolium</span>
+                </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+</body>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        
+      // simple chart
+		var flash = [[0, 11], [1, 9], [2,12], [3, 8], [4, 7], [5, 3], [6, 1]];
+		var html5 = [[0, 5], [1, 4], [2,4], [3, 1], [4, 9], [5, 10], [6, 13]];
+      var css3 = [[0, 6], [1, 1], [2,9], [3, 12], [4, 10], [5, 12], [6, 11]];
+			
+		function showTooltip(x, y, contents) {
+			jQuery('<div id="tooltip" class="tooltipflot">' + contents + '</div>').css( {
+				position: 'absolute',
+				display: 'none',
+				top: y + 5,
+				left: x + 5
+			}).appendTo("body").fadeIn(200);
+		}
+	
+			
+		var plot = jQuery.plot(jQuery("#chartplace"),
+			   [ { data: flash, label: "Flash(x)", color: "#6fad04"},
+              { data: html5, label: "HTML5(x)", color: "#06c"},
+              { data: css3, label: "CSS3", color: "#666"} ], {
+				   series: {
+					   lines: { show: true, fill: true, fillColor: { colors: [ { opacity: 0.05 }, { opacity: 0.15 } ] } },
+					   points: { show: true }
+				   },
+				   legend: { position: 'nw'},
+				   grid: { hoverable: true, clickable: true, borderColor: '#666', borderWidth: 2, labelMargin: 10 },
+				   yaxis: { min: 0, max: 15 }
+				 });
+		
+		var previousPoint = null;
+		jQuery("#chartplace").bind("plothover", function (event, pos, item) {
+			jQuery("#x").text(pos.x.toFixed(2));
+			jQuery("#y").text(pos.y.toFixed(2));
+			
+			if(item) {
+				if (previousPoint != item.dataIndex) {
+					previousPoint = item.dataIndex;
+						
+					jQuery("#tooltip").remove();
+					var x = item.datapoint[0].toFixed(2),
+					y = item.datapoint[1].toFixed(2);
+						
+					showTooltip(item.pageX, item.pageY,
+									item.series.label + " of " + x + " = " + y);
+				}
+			
+			} else {
+			   jQuery("#tooltip").remove();
+			   previousPoint = null;            
+			}
+		
+		});
+		
+		jQuery("#chartplace").bind("plotclick", function (event, pos, item) {
+			if (item) {
+				jQuery("#clickdata").text("You clicked point " + item.dataIndex + " in " + item.series.label + ".");
+				plot.highlight(item.series, item.datapoint);
+			}
+		});
+    
+        
+        //datepicker
+        jQuery('#datepicker').datepicker();
+        
+        // tabbed widget
+        jQuery('.tabbedwidget').tabs();
+        
+        
+    
+    });
+</script>
+</html>

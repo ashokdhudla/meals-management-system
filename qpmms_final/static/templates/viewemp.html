@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %} 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
+</script>
+  <script>
+  function edit(id)
+  {
+    var url ='/regemp?eid='+id;
+    window.location.href = url
+  }
+  </script>
+
+  <script>
+  function delete(id)
+  {
+    alert("delete");
+  }
+  </script>
+					<table class="table table-bordered table-hover table-striped tablesorter" id="guest_list">
+                          <thead>
+                            <tr>
+                              <th>First Name <i class="fa fa-sort"></i></th>
+                              <th>Last Name <i class="fa fa-sort"></i></th>
+                              <th>Employee Id<i class="fa fa-sort"></i></th>
+                              <th>Rfidcardno <i class="fa fa-sort"></i></th>
+                              <th>Gender<i class="fa fa-sort"></i></th>
+                              <th>Email Id<i class="fa fa-sort"></i></th>
+                              <th>Contact NO<i class="fa fa-sort"></i></th>
+                              <th>Employee Type<i class="fa fa-sort"></i></th>
+                              <th>Company<i class="fa fa-sort"></i></th>
+                              <th>Department<i class="fa fa-sort"></i></th>
+                              <!-- <th>Member<i class="fa fa-sort"></i></th>                -->                    
+                            </tr>
+                          </thead>
+                          <tbody>
+                          {%for user in qpusers %}
+                            <tr>
+                              <td align="center">{{ user.first_name}}</td>                  
+                              <td align="center">{{ user.last_name}}</td>
+                              <td align="center">{{ user.employee_id}}</td>
+                              <td align="center">{{ user.rfidcardno}}</td> 
+                              <td align="center">{{ user.gender}}</td>
+                              <td align="center">{{ user.email_id}}</td>
+                              <td align="center">{{ user.contact_no}}</td>
+                              <td align="center">{{ user.employee_type}}</td>
+                              <td align="center">{{ user.company}}</td>
+                              <td align="center">{{ user.department}}</td>               
+                              <td><button type="button"  class="btn btn-primary center" onclick="edit({{user.id}})">Edit</button><br/>
+                              </td>             
+                              <!-- <td><button type="button"  class="btn btn-primary center" onclick="delete({{user.id}})">Delete</button><br/>    -->   
+                              </tr>
+                              {%endfor%}                     
+                          </tbody>
+                        </table>
+
+                       
+{% endblock %}

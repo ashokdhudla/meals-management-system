@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %} 
+					<table class="table table-bordered table-hover table-striped tablesorter" id="guest_list">
+                          <thead>
+                            <tr>
+                              <th>Company Name<i class="fa fa-sort"></i></th>
+                              <th>Company Location<i class="fa fa-sort"></i></th>
+                              <th>Contract No<i class="fa fa-sort"></i></th>
+                              <th>Contracy Title <i class="fa fa-sort"></i></th>              
+                            </tr>
+                          </thead>
+                          <tbody>
+                          {%for com in companies %}
+                            <tr>
+                              <td align="center">{{ com.company_name}}</td>                  
+                              <td align="center">{{ com.company_location}}</td>
+                              <td align="center">{{ com.contract_no}}</td>
+                              <td align="center">{{ com.contracy_title}}</td> 
+                              
+                              <!-- <td align="center">{{ user.employee_type}}</td>
+                              <td align="center">{{ user.company}}</td>
+                              <td align="center">{{ user.department}}</td>   -->             
+                              <td><button type="button"  class="btn btn-primary center" onclick="Edit({{com.id}})">Edit</button><br/>
+                              <td><button type="button"  class="btn btn-primary center" onclick="Delete({{com.id}})">Delete</button><br/>
+                              </td>                   
+                              </tr>
+                              {%endfor%}                     
+                          </tbody>
+                        </table>
+                        
+                        <script>
+
+{% endblock %}

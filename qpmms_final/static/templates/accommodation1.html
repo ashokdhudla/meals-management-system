@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="/static/css/dhtmlxcalendar.css"/>
+<script src="/static/js/dhtmlxcalendar.js"></script>
+
+<script>
+        var myCalendar;
+        function doOnLoad() {
+            myCalendar = new dhtmlXCalendarObject(["calendar","calendar2"]);
+        }
+</script>
+<script src="/static/js/calendar/clndr.js"></script>
+<script src="/static/js/calendar/moment-2.2.1.js"></script>
+{% endblock %}
+{% block content %} 
+<div class="pageheader">
+                <div class="pageicon"><span class="iconfa-pencil"></span></div>
+                    <div class="pagetitle"><h1>Accommodation Reports</h1></div>
+                    </div>
+                    <!-- <div class="errortitle">
+        <h4 class="animate0 fadeInUp">The page you are looking for has not been found.</h4>
+        <span class="animate1 bounceIn">4</span>
+        <span class="animate2 bounceIn">0</span>
+        <span class="animate3 bounceIn">4</span>
+        <div class="errorbtns animate4 fadeInUp">
+            <a onclick="history.back()" class="btn btn-primary btn-large">Go to Previous Page</a>
+            <a href="dashboard.html" class="btn btn-large">Go to Dashboard</a>
+        </div>
+    </div> -->
+    <div class="container-fluid">
+    <div class="span9">
+    <form action="adetailreports" class="stdform" method="POST">{% csrf_token %}
+    <div class="form-group-control span6" style="float:left;">
+        <!-- From : <input type="date" name="from" /> -->
+        From : <input type="text" id="calendar" name='fromdate' />
+     </div>
+     <div class="form-group-control">   
+        <!-- To : <input type="date" name="to" /> -->
+        To : <input type="text" id="calendar2" name='todate' />
+     </div>
+     <div class="form-group text-center"  > 
+     <button type="submit" class="btn btn-primary" align="center" style="margin-right:0px;">Submit</button>
+     <!-- <input type="button" id='submit' value="submit" /> -->
+     </div>
+   <!-- <form method="POST" action="">
+     <table class="table-hover table-stripped">
+         <tr align='justify'>
+         <td><h5>From :</h5></td>
+         <td><input type="date" id="from" name="from"></td>
+         <td></td>
+         <td><h5>To :</h5></td>
+         <td><input type="date" id="to" name="to"></td>
+         <td><button type="button" class="btn btn-primary" align="right">Submit</button></td>
+        </tr>
+     </table> -->
+      </div>  
+<table class="table table-hover table-striped table-bordered table-condensed">
+<tr>
+        <td>EmpId</td>
+        <!-- <td>Employee_Name</td> -->
+        <td>IPAddress Of Entries</td>
+        <td>IPAddress Of Exits</td>
+        <td>Building Name For Entry</td>
+        <td>Building Name For Exit</td>
+        <td>Time For Entries</td>
+        <td>Time For Exits</td>
+        <td>Rfidcard No</td>
+        <!-- <td>Build</td> -->
+       <!--  <td>Status</td> -->
+<!--<td>Dinner</td> -->
+</tr>
+{% for obj in lists %}
+    <tr>
+        <td>
+        {{ obj.empid }}
+        </td>
+        <td>
+        {{ obj.ip_addr }}
+        </td>
+         <td>
+        {{ obj.ip_addr1 }}
+        </td>
+         <td>
+        {{ obj.status }}
+        </td>
+         <td>
+        {{ obj.status1 }}
+        </td>
+        <td>
+        {{ obj.timeforentry}}
+        </td>
+         <td>
+        {{ obj.timeforexit }}
+        </td>
+         <td>
+        {{ obj.rfidcardno }}
+        </td>
+<!--         <td>
+        {{ obj.stu }}
+        </td> -->
+        <!-- <td>
+        {{ obj.status }}
+        </td> -->
+       </tr>
+       {% endfor %}
+</table>
+</form>
+</div>
+
+{% endblock %} 

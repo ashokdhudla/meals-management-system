@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %} 
+<div class="pageheader">
+    <div class="pageicon"><span class="iconfa-pencil"></span></div>
+        <div class="pagetitle"><h1>Register Admin</h1></div>
+</div>
+    <div class="maincontent">
+        <div class="maincontentinner">
+          <div style="min-height: 300px;">
+              <div class="span6">
+              <form method="POST" action="" class="stdform">
+                {% csrf_token %}
+                
+                {{ form.as_p }}
+
+          <section class="row text-center">
+            <button class="btn btn-default">Submit</button>
+          </section>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
